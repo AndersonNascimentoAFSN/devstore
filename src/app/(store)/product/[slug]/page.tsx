@@ -5,11 +5,6 @@ import { Product } from '@/data/types/product'
 import { fetchProductBySlug } from '@/services/fetchProductBySlug'
 import { formatterCurrencyNumber } from '@/utils'
 
-// export const metadata: Metadata = {
-//   title: 'Product',
-//   description: 'Product page',
-// }
-
 interface ProductProps {
   params: { slug: string }
 }
