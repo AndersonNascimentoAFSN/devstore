@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { z } from 'zod'
 
 import data from '../data.json'
 
@@ -8,12 +9,23 @@ interface GetParams {
   }
 }
 
-export async function GET(req: NextRequest, { params: { slug } }: GetParams) {
+export async function GET(_req: NextRequest, { params }: GetParams) {
   await new Promise((resolve) => setTimeout(resolve, 5000)) // delay 5s
 
-  const productFound = data.products.find((product) => product.slug === slug)
+  const slug = z.string().safeParse(params.slug)
 
-  if (!productFound) {
+  if (!slug.success) {
+    return NextResponse.json(
+      {
+        message: 'Invalid slug',
+      },
+      { status: 400 },
+    )
+  }
+
+  const product = data.products.find((product) => product.slug === slug.data)
+
+  if (!product) {
     return NextResponse.json(
       {
         message: 'Product not found',
@@ -24,7 +36,7 @@ export async function GET(req: NextRequest, { params: { slug } }: GetParams) {
 
   return NextResponse.json(
     {
-      product: productFound,
+      product,
     },
     { status: 200 },
   )
