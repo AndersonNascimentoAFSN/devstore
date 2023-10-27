@@ -2,15 +2,16 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import data from '../data.json'
 
-export async function GET(req: NextRequest) {
+interface GetParams {
+  params: {
+    slug: string
+  }
+}
+
+export async function GET(req: NextRequest, { params: { slug } }: GetParams) {
   await new Promise((resolve) => setTimeout(resolve, 5000)) // delay 5s
 
-  const splitUrl = req.url.split('/')
-  const [slugProduct] = splitUrl.slice(-1)
-
-  const productFound = data.products.find(
-    (product) => product.slug === slugProduct,
-  )
+  const productFound = data.products.find((product) => product.slug === slug)
 
   if (!productFound) {
     return NextResponse.json(
