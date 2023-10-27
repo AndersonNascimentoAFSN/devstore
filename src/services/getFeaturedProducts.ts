@@ -5,7 +5,7 @@ import { Product } from '@/data/types/product'
 export async function getFeaturedProducts(): Promise<Product[]> {
   const revalidationTime = 60 * 60 // 1 hours
 
-  const response = await api('/products/featured', {
+  const response = await api('/product/featured', {
     cache: 'force-cache',
     // cache: 'no-cache',
     next: {

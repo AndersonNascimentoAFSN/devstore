@@ -11,7 +11,7 @@ export async function fetchProductBySlug({
 }: FetchProductBySlugProps): Promise<{ product: Product }> {
   const revalidationTime = 60 * 60 // 1 hours
 
-  const response = await api(`/products/${slug}`, {
+  const response = await api(`/product/${slug}`, {
     cache: 'force-cache',
     // cache: 'no-cache',
     next: {
