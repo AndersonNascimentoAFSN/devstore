@@ -1,9 +1,13 @@
-import { Products } from '@/components/products'
+import { Suspense } from 'react'
+
+import { Products, ProductsLoading } from '@/components/products'
 
 export default function Home() {
   return (
     <main>
-      <Products />
+      <Suspense fallback={<ProductsLoading />}>
+        <Products />
+      </Suspense>
     </main>
   )
 }
