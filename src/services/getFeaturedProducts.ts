@@ -9,7 +9,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
     cache: 'force-cache',
     // cache: 'no-cache',
     next: {
-      // tags: ['products-featured'],
+      tags: ['products-featured'],
       revalidate: revalidationTime,
     },
   })

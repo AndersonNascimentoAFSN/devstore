@@ -1,7 +1,9 @@
+import { ProductsLoading } from '@/components/products'
+
 export default function HomeLoading() {
   return (
     <>
-      <p>Carregando...</p>
+      <ProductsLoading />
     </>
   )
 }

@@ -10,27 +10,29 @@ interface ProductProps {
 export default async function ProductPage({ params }: ProductProps) {
   const { slug } = params
 
-  const { product } = await fetchProductBySlug({ slug })
+  const product = await fetchProductBySlug({ slug })
 
   const productDTO = (product: Product | undefined) => {
     const taxe = 12
     const discount = product?.price && product?.price / taxe
 
     return {
-      ...product,
-      price: product?.price && formatterCurrencyNumber(product?.price),
-      discount: discount && formatterCurrencyNumber(discount),
+      image: product?.image ?? '',
+      price: formatterCurrencyNumber(product?.price ?? 0),
+      title: product?.title ?? '',
+      discount: formatterCurrencyNumber(discount ?? 0),
+      description: product?.description ?? '',
     }
   }
 
-  const productFormatted = productDTO(product)
+  const productFormatted = productDTO(product?.product)
 
   return (
     <main className="relative grid max-h-[860px] grid-cols-3">
       <div className="col-span-2 overflow-hidden">
         <Image
           alt=""
-          src={product?.image}
+          src={productFormatted?.image}
           width={1000}
           height={1000}
           quality={100}
@@ -38,9 +40,11 @@ export default async function ProductPage({ params }: ProductProps) {
       </div>
 
       <div className="flex flex-col justify-center px-12">
-        <h1 className="text-3xl font-bold leading-tight">{product?.title}</h1>
+        <h1 className="text-3xl font-bold leading-tight">
+          {productFormatted?.title}
+        </h1>
         <p className="mt-2 leading-relaxed text-zinc-400">
-          {product?.description}
+          {productFormatted?.description}
         </p>
 
         <div className="mt-8 flex items-center gap-3">
