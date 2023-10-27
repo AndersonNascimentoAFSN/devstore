@@ -1,10 +1,27 @@
+import { Metadata } from 'next'
+import Image from 'next/image'
+
 import { Product } from '@/data/types/product'
 import { fetchProductBySlug } from '@/services/fetchProductBySlug'
 import { formatterCurrencyNumber } from '@/utils'
-import Image from 'next/image'
+
+// export const metadata: Metadata = {
+//   title: 'Product',
+//   description: 'Product page',
+// }
 
 interface ProductProps {
   params: { slug: string }
+}
+
+export async function generateMetadata({
+  params,
+}: ProductProps): Promise<Metadata> {
+  const product = await fetchProductBySlug({ slug: params.slug })
+  return {
+    title: product?.product.title ?? '',
+    description: `Page of product ${params.slug}`,
+  }
 }
 
 export default async function ProductPage({ params }: ProductProps) {
