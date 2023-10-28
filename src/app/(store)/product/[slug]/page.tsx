@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Product } from '@/data/types/product'
 import { fetchProductBySlug } from '@/services/fetchProductBySlug'
 import { formatterCurrencyNumber } from '@/utils'
+import { getFeaturedProducts } from '@/services/getFeaturedProducts'
 
 interface ProductProps {
   params: { slug: string }
@@ -17,6 +18,14 @@ export async function generateMetadata({
     title: product?.product.title ?? '',
     description: `Page of product ${params.slug}`,
   }
+}
+
+export async function generateStaticParams() {
+  const products = await getFeaturedProducts()
+
+  return products.map((product) => ({
+    slug: product.slug,
+  }))
 }
 
 export default async function ProductPage({ params }: ProductProps) {
