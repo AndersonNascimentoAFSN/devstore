@@ -5,6 +5,7 @@ import { Product } from '@/data/types/product'
 import { fetchProductBySlug } from '@/services/fetchProductBySlug'
 import { formatterCurrencyNumber } from '@/utils'
 import { getFeaturedProducts } from '@/services/getFeaturedProducts'
+import { Skeleton } from '@/components/skeleton'
 
 interface ProductProps {
   params: { slug: string }
@@ -116,5 +117,14 @@ export default async function ProductPage({ params }: ProductProps) {
         </button>
       </div>
     </main>
+  )
+}
+
+export function ProductSkeleton() {
+  return (
+    <div className="grid h-full grid-cols-9 grid-rows-6 gap-6">
+      <Skeleton className="col-span-2" />
+      <Skeleton className="col-span-1" />
+    </div>
   )
 }
