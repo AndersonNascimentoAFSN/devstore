@@ -6,6 +6,7 @@ import { fetchProductBySlug } from '@/services/fetchProductBySlug'
 import { formatterCurrencyNumber } from '@/utils'
 import { getFeaturedProducts } from '@/services/getFeaturedProducts'
 import { Skeleton } from '@/components/skeleton'
+import { AddCartButton } from '@/components/add-cart-button'
 
 interface ProductProps {
   params: { slug: string }
@@ -39,6 +40,7 @@ export default async function ProductPage({ params }: ProductProps) {
     const discount = product?.price && product?.price / taxe
 
     return {
+      id: product?.id ?? 0,
       image: product?.image ?? '',
       price: formatterCurrencyNumber(product?.price ?? 0),
       title: product?.title ?? '',
@@ -109,12 +111,7 @@ export default async function ProductPage({ params }: ProductProps) {
           </div>
         </div>
 
-        <button
-          type="button"
-          className="mt-8 flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white"
-        >
-          Adicionar ao carrinho
-        </button>
+        <AddCartButton productId={productFormatted.id} />
       </div>
     </main>
   )
