@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { Header } from '@/components'
-import { CatProvider } from '@/contexts/card-context'
+import { CatProvider } from '@/contexts/cart-context'
 
 export const metadata: Metadata = {
   title: {
