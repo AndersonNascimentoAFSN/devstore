@@ -12,7 +12,7 @@ export async function fetchProductBySlug({
   const revalidationTime = 60 * 60 // 1 hours
 
   const response = await api(`/product/${slug}`, {
-    cache: 'force-cache',
+    // cache: 'force-cache',
     // cache: 'no-cache',
     next: {
       tags: ['product-by-slug'],

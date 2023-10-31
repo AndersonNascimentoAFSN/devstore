@@ -8,7 +8,7 @@ export async function getSearchProducts(
   const revalidationTime = 60 * 60 // 1 hours
 
   const response = await api(`/product/search?q=${query}`, {
-    cache: 'force-cache',
+    // cache: 'force-cache',
     // cache: 'no-cache',
     next: {
       tags: ['search-products'],
