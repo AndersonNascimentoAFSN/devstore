@@ -18,7 +18,7 @@ export const Products: FC = async () => {
         className="group relative col-span-6 row-span-6 rounded-lg bg-zinc-900 overflow-hidden flex justify-center items-start"
       >
         <Image
-          src={hightLightedProduct?.image}
+          src={hightLightedProduct?.image ?? ''}
           alt=""
           width={920}
           height={920}
@@ -27,21 +27,23 @@ export const Products: FC = async () => {
         />
 
         <div className="absolute bottom-28 right-28 h12 flex items-center gap-2 max-w-[280ox] rounded-full border-2 border-zinc-500 bg-black/60 p-1 pl-5">
-          <span className="text-sm truncate">{hightLightedProduct.title}</span>
+          <span className="text-sm truncate">
+            {hightLightedProduct?.title ?? ''}
+          </span>
           <span className="flex h-ful items-center justify-center rounded-full bg-violet-500 px-4 font-semibold">
-            {hightLightedProduct.priceFormatted}
+            {hightLightedProduct?.priceFormatted ?? ''}
           </span>
         </div>
       </Link>
 
       {otherProducts.map((product) => (
         <Link
-          key={product.slug}
-          href={`/product/${product.slug}`}
+          key={product?.slug}
+          href={`/product/${product?.slug}`}
           className="group relative col-span-3 row-span-3 rounded-lg bg-zinc-900 overflow-hidden flex justify-center items-start"
         >
           <Image
-            src={product.image}
+            src={product?.image ?? ''}
             alt=""
             width={920}
             height={920}
@@ -50,9 +52,9 @@ export const Products: FC = async () => {
           />
 
           <div className="absolute bottom-10 right-10 h12 flex items-center gap-2 max-w-[280ox] rounded-full border-2 border-zinc-500 bg-black/60 p-1 pl-5">
-            <span className="text-sm truncate">{product.title}</span>
+            <span className="text-sm truncate">{product?.title}</span>
             <span className="flex h-ful items-center justify-center rounded-full bg-violet-500 px-4 font-semibold">
-              {product.priceFormatted}
+              {product?.priceFormatted}
             </span>
           </div>
         </Link>

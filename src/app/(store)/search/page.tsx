@@ -28,12 +28,12 @@ export default async function Search({ searchParams }: SearchProps) {
       <div className="grid grid-cols-3 gap-6">
         {productFormatted?.map((product) => (
           <Link
-            href={`/product/${product.image}`}
+            href={`/product/${product?.image}`}
             className="group relative rounded-lg bg-zinc-900 overflow-hidden flex justify-center items-start"
-            key={product.id}
+            key={product?.id}
           >
             <Image
-              src={product.image}
+              src={product?.image ?? ''}
               alt=""
               width={480}
               height={480}
@@ -42,9 +42,9 @@ export default async function Search({ searchParams }: SearchProps) {
             />
 
             <div className="absolute bottom-28 right-28 h12 flex items-center gap-2 max-w-[280ox] rounded-full border-2 border-zinc-500 bg-black/60 p-1 pl-5">
-              <span className="text-sm truncate">{product.title}</span>
+              <span className="text-sm truncate">{product?.title}</span>
               <span className="flex h-ful items-center justify-center rounded-full bg-violet-500 px-4 font-semibold">
-                {product.priceFormatted}
+                {product?.priceFormatted}
               </span>
             </div>
           </Link>
