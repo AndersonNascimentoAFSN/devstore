@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import { Search } from 'lucide-react'
 import Image from 'next/image'
 import { CartWidget } from './cart-widget'
 import { SearchForm } from './search-form'
