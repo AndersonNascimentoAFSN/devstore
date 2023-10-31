@@ -3,31 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { getFeaturedProducts } from '@/services/getFeaturedProducts'
-import { formatterCurrencyNumber } from '@/utils'
-
-import type { Product } from '@/data/types/product'
 import { Skeleton } from './skeleton'
+import { productsDTO } from '@/dtos/productsDTO'
 
 export const Products: FC = async () => {
   const products = await getFeaturedProducts()
 
-  const productDTO = (products: Product[]) => {
-    const [hightLightedProduct, ...otherProducts] = products.map((product) => {
-      return {
-        title: product.title,
-        price: formatterCurrencyNumber(product.price),
-        image: product.image,
-        slug: product.slug,
-      }
-    })
-
-    return {
-      hightLightedProduct,
-      otherProducts,
-    }
-  }
-
-  const { hightLightedProduct, otherProducts } = productDTO(products)
+  const [hightLightedProduct, ...otherProducts] = productsDTO(products)
 
   return (
     <div className="grid max-h-[860px] grid-cols-9 grid-rows-6 gap-6">
@@ -47,7 +29,7 @@ export const Products: FC = async () => {
         <div className="absolute bottom-28 right-28 h12 flex items-center gap-2 max-w-[280ox] rounded-full border-2 border-zinc-500 bg-black/60 p-1 pl-5">
           <span className="text-sm truncate">{hightLightedProduct.title}</span>
           <span className="flex h-ful items-center justify-center rounded-full bg-violet-500 px-4 font-semibold">
-            {hightLightedProduct.price}
+            {hightLightedProduct.priceFormatted}
           </span>
         </div>
       </Link>
@@ -70,7 +52,7 @@ export const Products: FC = async () => {
           <div className="absolute bottom-10 right-10 h12 flex items-center gap-2 max-w-[280ox] rounded-full border-2 border-zinc-500 bg-black/60 p-1 pl-5">
             <span className="text-sm truncate">{product.title}</span>
             <span className="flex h-ful items-center justify-center rounded-full bg-violet-500 px-4 font-semibold">
-              {product.price}
+              {product.priceFormatted}
             </span>
           </div>
         </Link>

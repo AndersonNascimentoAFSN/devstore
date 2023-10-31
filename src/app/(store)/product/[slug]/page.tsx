@@ -1,12 +1,11 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 
-import { Product } from '@/data/types/product'
 import { fetchProductBySlug } from '@/services/fetchProductBySlug'
-import { formatterCurrencyNumber } from '@/utils'
 import { getFeaturedProducts } from '@/services/getFeaturedProducts'
 import { Skeleton } from '@/components/skeleton'
 import { AddCartButton } from '@/components/add-cart-button'
+import { productDTO } from '@/dtos/productDTO'
 
 interface ProductProps {
   params: { slug: string }
@@ -35,20 +34,6 @@ export default async function ProductPage({ params }: ProductProps) {
 
   const product = await fetchProductBySlug({ slug })
 
-  const productDTO = (product: Product | undefined) => {
-    const taxe = 12
-    const discount = product?.price && product?.price / taxe
-
-    return {
-      id: product?.id ?? 0,
-      image: product?.image ?? '',
-      price: formatterCurrencyNumber(product?.price ?? 0),
-      title: product?.title ?? '',
-      discount: formatterCurrencyNumber(discount ?? 0),
-      description: product?.description ?? '',
-    }
-  }
-
   const productFormatted = productDTO(product?.product)
 
   return (
@@ -56,7 +41,7 @@ export default async function ProductPage({ params }: ProductProps) {
       <div className="col-span-2 overflow-hidden">
         <Image
           alt=""
-          src={productFormatted?.image}
+          src={productFormatted?.image ?? ''}
           width={1000}
           height={1000}
           quality={100}
@@ -111,7 +96,7 @@ export default async function ProductPage({ params }: ProductProps) {
           </div>
         </div>
 
-        <AddCartButton productId={productFormatted.id} />
+        <AddCartButton productId={productFormatted?.id ?? 0} />
       </div>
     </main>
   )
