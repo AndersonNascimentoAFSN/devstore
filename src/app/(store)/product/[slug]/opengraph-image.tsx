@@ -24,7 +24,7 @@ export default async function OgImage({
   const product = await fetchProductBySlug({ slug })
 
   const productImageURL = new URL(
-    product?.product.image ?? '',
+    product?.image ?? '',
     env.APP_URL ?? '',
   ).toString()
 
