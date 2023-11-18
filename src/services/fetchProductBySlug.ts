@@ -8,10 +8,10 @@ interface FetchProductBySlugProps {
 
 export async function fetchProductBySlug({
   slug,
-}: FetchProductBySlugProps): Promise<{ product: Product } | undefined> {
+}: FetchProductBySlugProps): Promise<Product | undefined> {
   const revalidationTime = 60 * 60 // 1 hours
 
-  const response = await api(`/product/${slug}`, {
+  const response = await api(`/products/${slug}`, {
     // cache: 'force-cache',
     // cache: 'no-cache',
     next: {

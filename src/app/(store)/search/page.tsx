@@ -17,7 +17,7 @@ export default async function Search({ searchParams }: SearchProps) {
 
   const products = await getSearchProducts(query)
 
-  const productFormatted = productsDTO(products?.products ?? [])
+  const productFormatted = productsDTO(products ?? [])
 
   return (
     <main className="flex flex-col gap-4">

@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 import { fetchProductBySlug } from '@/services/fetchProductBySlug'
 import { getFeaturedProducts } from '@/services/getFeaturedProducts'
-import { Skeleton } from '@/components/skeleton'
 import { AddCartButton } from '@/components/add-cart-button'
 import { productDTO } from '@/dtos/productDTO'
 
@@ -16,7 +15,7 @@ export async function generateMetadata({
 }: ProductProps): Promise<Metadata> {
   const product = await fetchProductBySlug({ slug: params.slug })
   return {
-    title: product?.product?.title ?? '',
+    title: product?.title ?? '',
     description: `Page of product ${params.slug}`,
   }
 }
@@ -34,7 +33,7 @@ export default async function ProductPage({ params }: ProductProps) {
 
   const product = await fetchProductBySlug({ slug })
 
-  const productFormatted = productDTO(product?.product)
+  const productFormatted = productDTO(product)
 
   return (
     <main className="relative grid max-h-[860px] grid-cols-3">
@@ -99,14 +98,5 @@ export default async function ProductPage({ params }: ProductProps) {
         <AddCartButton productId={productFormatted?.id ?? 0} />
       </div>
     </main>
-  )
-}
-
-export function ProductSkeleton() {
-  return (
-    <div className="grid h-full grid-cols-9 grid-rows-6 gap-6">
-      <Skeleton className="col-span-2" />
-      <Skeleton className="col-span-1" />
-    </div>
   )
 }
