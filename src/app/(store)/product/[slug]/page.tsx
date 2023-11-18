@@ -16,7 +16,7 @@ export async function generateMetadata({
 }: ProductProps): Promise<Metadata> {
   const product = await fetchProductBySlug({ slug: params.slug })
   return {
-    title: product?.product.title ?? '',
+    title: product?.product?.title ?? '',
     description: `Page of product ${params.slug}`,
   }
 }
