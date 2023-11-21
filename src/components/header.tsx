@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, Suspense } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { CartWidget } from './cart-widget'
@@ -12,7 +12,9 @@ export const Header: FC = () => {
           devstore
         </Link>
 
-        <SearchForm />
+        <Suspense fallback={null}>
+          <SearchForm />
+        </Suspense>
       </div>
 
       <div className="flex items-center gap-4">
